@@ -3,3 +3,5 @@ syntax: glob
 bin/*
 syntax: glob
 .metadata/*
+syntax: glob
+gen/*
