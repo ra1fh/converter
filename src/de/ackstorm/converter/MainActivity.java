@@ -1,9 +1,11 @@
 package de.ackstorm.converter;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
+
+	public static String TAG = "Converter";
 	private static UnitConverter mUnitConverter = null;
 
 	public static UnitConverter getUnitConverter(Context context) {
@@ -30,7 +34,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate called");
         setContentView(R.layout.activity_main);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.setSubtitle("Unit Conversion Made Easy");
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
