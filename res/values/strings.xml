@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Converter</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Convert</string>
+    <string name="title_activity_display_message">My Message</string>
+    
+    <!-- \u2009 == &thinsp; -->
+    
+    <!-- Category -->
+    
+    <string name="cat_length">Length</string>
+    <string name="cat_torque">Torque</string>
+    <string name="cat_volume">Volume</string>
+    <string name="cat_mass">Mass</string>
+    
+    <string-array name="cat_array">
+        <item>@string/cat_length</item>
+        <item>@string/cat_torque</item>
+        <item>@string/cat_volume</item>
+        <item>@string/cat_mass</item>
+    </string-array>
+
+    <!-- Length -->
+    
+    <string name="unit_m">m (metre)</string>
+    <string name="unit_km">km (metre)</string>
+    <string name="unit_yd">yd (yard)</string>
+    <string name="unit_in">in (inch)</string>
+    <string name="unit_ft">ft (foot)</string>
+    <string name="unit_mi">mi (mile)</string>
+    <string name="unit_nmi">nmi (nautical mile)</string>
+    
+    <string-array name="length_array">
+        <item>@string/unit_m</item>
+        <item>@string/unit_km</item>
+        <item>@string/unit_yd</item>
+        <item>@string/unit_in</item>
+        <item>@string/unit_ft</item>
+        <item>@string/unit_mi</item>
+        <item>@string/unit_nmi</item>
+    </string-array>
+    
+    <!-- Torque -->
+    
+    <string name="unit_nm">N\u2009m</string>
+    <string name="unit_inlbf">in\u2009lbf</string>
+    
+    <string-array name="torque_array">
+        <item>@string/unit_nm</item>
+        <item>@string/unit_inlbf</item>
+    </string-array>
+
+    <!-- Volume -->
+    
+    <string name="unit_l">l (litre)</string>
+    <string name="unit_m3">m³ (cubic metre)</string>
+    <string name="unit_gal_us">gal (US gallon)</string>
+    <string name="unit_gal_imp">gal (imperial)</string>
+    
+    <string-array name="volume_array">
+        <item>@string/unit_l</item>
+        <item>@string/unit_m3</item>
+        <item>@string/unit_gal_us</item>
+        <item>@string/unit_gal_imp</item>
+    </string-array>
+    
+    <!-- Mass -->
+    
+    <string name="unit_kg">kg</string>
+    <string name="unit_lb">lb (pound)</string>
+    <string name="unit_oz">oz (US)</string>
+    
+    <string-array name="mass_array">
+        <item>@string/unit_kg</item>
+        <item>@string/unit_lb</item>
+        <item>@string/unit_oz</item>
+    </string-array>
+    
+</resources>
