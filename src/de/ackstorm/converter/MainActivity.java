@@ -1,8 +1,6 @@
 package de.ackstorm.converter;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -20,14 +18,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
-	UnitConverter mUnitConverter;
+	private static UnitConverter mUnitConverter = null;
 
+	public static UnitConverter getUnitConverter(Context context) {
+		if (mUnitConverter == null){
+	        mUnitConverter = new UnitConverter(context);
+		}
+		return mUnitConverter;
+	}
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mUnitConverter = new UnitConverter(this);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -58,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
     /**
      * converter fragment containing a simple view.
      */
-    public class ConverterFragment extends Fragment {
+    public static class ConverterFragment extends Fragment {
     	
     	public ConverterFragment() {
         }
@@ -83,7 +86,8 @@ public class MainActivity extends ActionBarActivity {
 					String valueString = editText.getText().toString();
 					double value = Float.valueOf(valueString.trim()).floatValue();
 					
-					String output = mUnitConverter.convert(cat, unit, value);
+					UnitConverter unitConverter = getUnitConverter(getActivity());
+					String output = unitConverter.convert(cat, unit, value);
 							
 					outputText.setText(output);
 				}
@@ -98,9 +102,9 @@ public class MainActivity extends ActionBarActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, 
                         int pos, long id) {
                 	String item = (String) parent.getItemAtPosition(pos);
-                	
-                	if (mUnitConverter.containsCategory(item)) {
-                		populateSpinner(R.id.unit_spinner, mUnitConverter.getCategoryId(item));
+                	UnitConverter unitConverter = getUnitConverter(getActivity());
+                	if (unitConverter.containsCategory(item)) {
+                		populateSpinner(R.id.unit_spinner, unitConverter.getCategoryId(item));
                 	}
                 }
                 
