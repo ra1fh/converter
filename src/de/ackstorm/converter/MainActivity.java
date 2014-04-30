@@ -3,8 +3,8 @@ package de.ackstorm.converter;
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Fragment;
+import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
 	public static String TAG = "Converter";
 	private static UnitConverter mUnitConverter = null;
@@ -33,18 +33,19 @@ public class MainActivity extends ActionBarActivity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "MainActivity.onCreate called");
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate called");
         setContentView(R.layout.activity_main);
         
         ActionBar actionBar = getActionBar();
         actionBar.setSubtitle("Unit Conversion Made Easy");
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new ConverterFragment())
                     .commit();
         }
+        Log.d(TAG, "MainActivity.onCreate done");
     }
 
     @Override
@@ -74,8 +75,16 @@ public class MainActivity extends ActionBarActivity {
     	public ConverterFragment() {
         }
 
+    	@Override
+    	public void onCreate(Bundle savedInstanceState){
+            Log.d(TAG, "ConverterFragment.onCreate called");
+    		super.onCreate(savedInstanceState);
+            Log.d(TAG, "ConverterFragment.onCreate finished");
+    	}
+    	
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
+            Log.d(TAG, "ConverterFragment.onActivityCreated called");
             super.onActivityCreated(savedInstanceState);
                                 	
             Button convertButton = (Button) getActivity().findViewById(R.id.convert_button);
@@ -136,8 +145,9 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            Log.d(TAG, "ConverterFragment.onCreateView called");
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            
+            /* Context c = rootView.getContext(); */
             return rootView;
         }
         
