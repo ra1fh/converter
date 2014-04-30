@@ -2,48 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical" >
 
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_height="48dp" />
 
     <Spinner
         android:id="@+id/unit_spinner"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_height="48dp" />
     
     <EditText
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
         android:inputType="text|numberDecimal" />
 
     <Button
         android:id="@+id/convert_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_weight="0"
         android:text="@string/button_send" />
 
     <TextView
         android:id="@+id/output_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
