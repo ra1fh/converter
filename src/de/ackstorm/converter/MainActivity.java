@@ -1,10 +1,9 @@
 package de.ackstorm.converter;
 
 import android.app.ActionBar;
-import android.content.Context;
-import android.os.Bundle;
-import android.app.Fragment;
 import android.app.Activity;
+import android.app.Fragment;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,18 +21,10 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	public static String TAG = "Converter";
-	private static UnitConverter mUnitConverter = null;
-
-	public static UnitConverter getUnitConverter(Context context) {
-		if (mUnitConverter == null){
-	        mUnitConverter = new UnitConverter(context);
-		}
-		return mUnitConverter;
-	}
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "MainActivity.onCreate called");
+        Log.d(TAG, "MainActivity.onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -45,12 +36,10 @@ public class MainActivity extends Activity {
                     .add(R.id.container, new ConverterFragment())
                     .commit();
         }
-        Log.d(TAG, "MainActivity.onCreate done");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -68,60 +57,65 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * converter fragment containing a simple view.
+     * converter fragment containing the main view.
      */
     public static class ConverterFragment extends Fragment {
     	
-    	public ConverterFragment() {
-        }
-
+    	protected UnitConverter mUnitConverter;
+    	protected Button mConvertButton;
+    	protected Spinner mUnitSpinner;
+    	protected Spinner mCategorySpinner;
+    	protected EditText mEditText;
+    	protected TextView mOutputText;
+    	
     	@Override
     	public void onCreate(Bundle savedInstanceState){
-            Log.d(TAG, "ConverterFragment.onCreate called");
     		super.onCreate(savedInstanceState);
-            Log.d(TAG, "ConverterFragment.onCreate finished");
+    		mUnitConverter = new UnitConverter(getActivity().getApplicationContext());
     	}
     	
         @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            Log.d(TAG, "ConverterFragment.onActivityCreated called");
-            super.onActivityCreated(savedInstanceState);
-                                	
-            Button convertButton = (Button) getActivity().findViewById(R.id.convert_button);
-            convertButton.setOnClickListener(new View.OnClickListener() {
+        public View onCreateView(LayoutInflater inflater,
+        						 ViewGroup container,
+        						 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+                        
+            mConvertButton   = (Button)   rootView.findViewById(R.id.convert_button);
+			mUnitSpinner     = (Spinner)  rootView.findViewById(R.id.unit_spinner);
+			mCategorySpinner = (Spinner)  rootView.findViewById(R.id.category_spinner);
+	    	mEditText        = (EditText) rootView.findViewById(R.id.edit_message);
+	    	mOutputText      = (TextView) rootView.findViewById(R.id.output_text);
+            
+            mConvertButton.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View view) {
-					Spinner unitSpinner = (Spinner) getActivity().findViewById(R.id.unit_spinner);
-					Spinner catSpinner = (Spinner) getActivity().findViewById(R.id.category_spinner);
-			    	EditText editText = (EditText) getActivity().findViewById(R.id.edit_message);
-			    	TextView outputText = (TextView) getActivity().findViewById(R.id.output_text);
-			    	
-					String unit = (String) unitSpinner.getSelectedItem();
-					String cat = (String) catSpinner.getSelectedItem();
+					String unit = (String) mUnitSpinner.getSelectedItem();
+					String cat = (String) mCategorySpinner.getSelectedItem();
+					String valueString = mEditText.getText().toString().trim();
+					String output;
+					double value;
 					
-					String valueString = editText.getText().toString();
-					double value = Float.valueOf(valueString.trim()).floatValue();
-					
-					UnitConverter unitConverter = getUnitConverter(getActivity());
-					String output = unitConverter.convert(cat, unit, value);
-							
-					outputText.setText(output);
+					if (! valueString.isEmpty()) {
+						value = Float.valueOf(valueString.trim()).floatValue();
+						output = mUnitConverter.convert(cat, unit, value);							
+					} else {
+						output = "NaN";
+					}
+					mOutputText.setText(output);
 				}
 				
 			});
         	
-        	populateSpinner(R.id.category_spinner, R.array.cat_array);
-
-        	(((Spinner) getActivity().findViewById(R.id.category_spinner))).setOnItemSelectedListener(new OnItemSelectedListener() {
+        	populateSpinner(mCategorySpinner, R.array.cat_array);
+        	mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
         		
         		@Override
                 public void onItemSelected(AdapterView<?> parent, View view, 
                         int pos, long id) {
                 	String item = (String) parent.getItemAtPosition(pos);
-                	UnitConverter unitConverter = getUnitConverter(getActivity());
-                	if (unitConverter.containsCategory(item)) {
-                		populateSpinner(R.id.unit_spinner, unitConverter.getCategoryId(item));
+                	if (mUnitConverter.containsCategory(item)) {
+                		populateSpinner(mUnitSpinner, mUnitConverter.getCategoryId(item));
                 	}
                 }
                 
@@ -132,24 +126,15 @@ public class MainActivity extends Activity {
 
         	});
 
+            return rootView;
         }
-        
-        public void populateSpinner(int spinnerId, int aryId) {
-    		Spinner spinner = (Spinner) getActivity().findViewById(spinnerId);
+
+        public void populateSpinner(Spinner spinner, int aryId) {
     		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
     			aryId, android.R.layout.simple_spinner_item);
     		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     		spinner.setAdapter(adapter);
         }
-       
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            Log.d(TAG, "ConverterFragment.onCreateView called");
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            /* Context c = rootView.getContext(); */
-            return rootView;
-        }
-        
-    }
+
+    } /* class ConverterFragment */
 }
