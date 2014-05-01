@@ -16,6 +16,7 @@
     <string name="cat_torque">Torque</string>
     <string name="cat_volume">Volume</string>
     <string name="cat_mass">Mass</string>
+    <string name="cat_temperature">Temperature</string>
     
     <!-- Length -->
     
@@ -44,5 +45,10 @@
     <string name="unit_kg">kg</string>
     <string name="unit_lb">lb (pound)</string>
     <string name="unit_oz">oz (US)</string>
+    
+    <!-- Temperature -->
+    
+    <string name="unit_celsius">°C</string>
+    <string name="unit_fahrenheit">°F</string>
     
 </resources>

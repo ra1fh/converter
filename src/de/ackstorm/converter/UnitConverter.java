@@ -38,6 +38,12 @@ public class UnitConverter {
     	cat.add(new Unit(R.string.unit_gal_us,  0.003785411784));
     	cat.add(new Unit(R.string.unit_gal_imp, 0.00454609));
     	mList.add(cat);
+    	
+    	cat = new Category(R.string.cat_temperature);
+    	cat.add(new Unit(R.string.unit_celsius,    1.0,       0.0));
+    	cat.add(new Unit(R.string.unit_fahrenheit, 5.0/9.0, -32.0));
+    	mList.add(cat);
+
 	}
 
 	public ArrayList<Integer> getUnits(int pos) {
@@ -56,7 +62,7 @@ public class UnitConverter {
 		return array;
 	}
 			
-	public LinkedHashMap<Integer, Double> convert(int category, int unit, Double value){
+	public LinkedHashMap<Integer, Double> convert(int category, int unit, Double inputValue){
 		LinkedHashMap<Integer, Double> output = new LinkedHashMap<Integer, Double>();
 		ArrayList<Unit> list = null;
 		Unit inputUnit = null;
@@ -67,7 +73,7 @@ public class UnitConverter {
 
 		for (Unit u : list) {
 			if (u != inputUnit) {
-				result = value / Double.valueOf(u.getVal()) * inputUnit.getVal();
+				result = ((inputValue + inputUnit.getOffset())/ Double.valueOf(u.getVal()) * inputUnit.getVal()) - u.getOffset();
 				output.put(u.getRes(), result);
 			}
 		}
