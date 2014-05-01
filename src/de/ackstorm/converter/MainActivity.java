@@ -212,11 +212,16 @@ public class MainActivity extends Activity {
 			}
 			
 			output = "";
-			value = Float.valueOf(valueString.trim()).floatValue();
-			result = mUnitConverter.convert(categoryIndex, unitIndex, value);
-			for (int k: result.keySet()) {
-				String unit = getActivity().getApplicationContext().getString(k);
-				output += result.get(k).toString() + " " + unit + "\n";
+			try {
+				value = Float.valueOf(valueString.trim()).floatValue();
+			
+				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+				for (int k: result.keySet()) {
+					String unit = getActivity().getApplicationContext().getString(k);
+					output += result.get(k).toString() + " " + unit + "\n";
+				}
+			} catch (NumberFormatException e) {
+	            Log.d(TAG, "updateResult: invalid number format");
 			}
 			mOutputText.setText(output);
         }
