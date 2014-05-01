@@ -68,6 +68,14 @@ public class MainActivity extends Activity {
     	protected EditText mEditText;
     	protected TextView mOutputText;
     	
+    	private static final String KEY_TEXT = "text";
+    	
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putString(KEY_TEXT, mOutputText.getText().toString());
+        }
+    	
     	@Override
     	public void onCreate(Bundle savedInstanceState){
     		super.onCreate(savedInstanceState);
@@ -126,6 +134,10 @@ public class MainActivity extends Activity {
 
         	});
 
+        	if (savedInstanceState != null)	{
+        		mOutputText.setText(savedInstanceState.getString(KEY_TEXT));
+        	}
+        	
             return rootView;
         }
 
