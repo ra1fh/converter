@@ -21,12 +21,6 @@
         android:layout_height="48dp"
         android:inputType="text|numberDecimal" />
 
-    <Button
-        android:id="@+id/convert_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_send" />
-
     <TextView
         android:id="@+id/output_text"
         android:layout_width="match_parent"
