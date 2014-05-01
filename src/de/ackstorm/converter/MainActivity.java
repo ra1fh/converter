@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
 	    	mEditText        = (EditText) rootView.findViewById(R.id.edit_message);
 	    	mOutputText      = (TextView) rootView.findViewById(R.id.output_text);
 
+            Log.d(TAG, "onCreateView");
         	if (savedInstanceState != null)	{
         		mOutputText.setText(savedInstanceState.getString(KEY_TEXT));
         	}
@@ -186,22 +187,36 @@ public class MainActivity extends Activity {
         }
         
         public void updateResult() {
+			LinkedHashMap<Integer, Double> result;
+			String output;
+			double value;
+			String valueString;
 			int unitIndex = mUnitSpinner.getSelectedItemPosition();
 			int categoryIndex = mCategorySpinner.getSelectedItemPosition();
-			String valueString = mEditText.getText().toString().trim();
-			String output = "";
-			LinkedHashMap<Integer, Double> result;
-			double value;
 			
-			if (! valueString.isEmpty() && unitIndex >= 0 && categoryIndex >= 0) {
-				value = Float.valueOf(valueString.trim()).floatValue();
-				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
-				for (int k: result.keySet()) {
-					String unit = getActivity().getApplicationContext().getString(k);
-					output += result.get(k).toString() + " " + unit + "\n";
-				}
-			} else {
-				output = "";
+			if (unitIndex < 0 || categoryIndex < 0) {
+				// might happen when TextEdit is modified
+				// before Spinners are populated (seen when
+				// switching between landscape and portrait
+				mOutputText.setText("");
+	            Log.d(TAG, "updateResult: invalid index");
+	            return;
+			}
+			
+			valueString = mEditText.getText().toString().trim();
+
+			if (valueString.isEmpty()) {
+				mOutputText.setText("");
+	            Log.d(TAG, "updateResult: empty valueString");
+	            return;
+			}
+			
+			output = "";
+			value = Float.valueOf(valueString.trim()).floatValue();
+			result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+			for (int k: result.keySet()) {
+				String unit = getActivity().getApplicationContext().getString(k);
+				output += result.get(k).toString() + " " + unit + "\n";
 			}
 			mOutputText.setText(output);
         }
