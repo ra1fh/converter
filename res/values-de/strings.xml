@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Konverter</string>
+    <string name="app_tagline">Einfaches umrechnen von Einheiten</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="button_send">Konvertieren</string>
+    
+    <!-- \u2009 == &thinsp; -->
+    
+    <!-- Category -->
+    
+    <string name="cat_length">Länge</string>
+    <string name="cat_torque">Drehmoment</string>
+    <string name="cat_volume">Volumen</string>
+    <string name="cat_mass">Masse</string>
+    <string name="cat_temperature">Temperatur</string>
+    
+    <!-- Length -->
+    
+    <string name="unit_m">m (Meter)</string>
+    <string name="unit_km">km (Meter)</string>
+    <string name="unit_yd">yd (Yard)</string>
+    <string name="unit_in">in (Inch)</string>
+    <string name="unit_ft">ft (Foot)</string>
+    <string name="unit_mi">mi (Meilen)</string>
+    <string name="unit_nmi">nmi (Nautische Meilen)</string>
+    
+    <!-- Torque -->
+    
+    <string name="unit_nm">N\u2009m</string>
+    <string name="unit_inlbf">in\u2009lbf</string>
+    
+    <!-- Volume -->
+    
+    <string name="unit_l">l (Liter)</string>
+    <string name="unit_m3">m³ (Kubikmeter)</string>
+    <string name="unit_gal_us">gal (US Gallonen)</string>
+    <string name="unit_gal_imp">gal (Imperiale Gallonen)</string>
+    
+    <!-- Mass -->
+    
+    <string name="unit_kg">kg</string>
+    <string name="unit_lb">lb (Pound)</string>
+    <string name="unit_oz">oz (US Unzen)</string>
+    
+    <!-- Temperature -->
+    
+    <string name="unit_celsius">°C</string>
+    <string name="unit_fahrenheit">°F</string>
+    
+</resources>

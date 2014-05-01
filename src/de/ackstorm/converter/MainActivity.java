@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         ActionBar actionBar = getActionBar();
-        actionBar.setSubtitle("Unit Conversion Made Easy");
+        actionBar.setSubtitle(getString(R.string.app_tagline));
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -107,10 +107,6 @@ public class MainActivity extends Activity {
 					String output = "";
 					LinkedHashMap<Integer, Double> result;
 					double value;
-					/*
-					String unit = (String) mUnitSpinner..getSelectedItem();
-					String cat = (String) mCategorySpinner.getSelectedItem();
-					*/
 					
 					if (! valueString.isEmpty()) {
 						value = Float.valueOf(valueString.trim()).floatValue();
