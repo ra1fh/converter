@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
         						 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
                         
-            mConvertButton   = (Button)   rootView.findViewById(R.id.convert_button);
+            // mConvertButton   = (Button)   rootView.findViewById(R.id.convert_button);
 			mUnitSpinner     = (Spinner)  rootView.findViewById(R.id.unit_spinner);
 			mCategorySpinner = (Spinner)  rootView.findViewById(R.id.category_spinner);
 	    	mEditText        = (EditText) rootView.findViewById(R.id.edit_message);
@@ -135,14 +135,14 @@ public class MainActivity extends Activity {
         		
         	});
 
-	    	mConvertButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View view) {
-					updateResult();
-				}
-				
-			});
+//	    	mConvertButton.setOnClickListener(new View.OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View view) {
+//					updateResult();
+//				}
+//				
+//			});
 
         	mEditText.addTextChangedListener(new TextWatcher() {
         		
@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
 			LinkedHashMap<Integer, Double> result;
 			double value;
 			
-			if (! valueString.isEmpty()) {
+			if (! valueString.isEmpty() && unitIndex >= 0 && categoryIndex >= 0) {
 				value = Float.valueOf(valueString.trim()).floatValue();
 				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
 				for (int k: result.keySet()) {
