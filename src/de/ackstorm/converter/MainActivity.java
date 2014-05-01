@@ -1,5 +1,8 @@
 package de.ackstorm.converter;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -79,7 +82,7 @@ public class MainActivity extends Activity {
     	@Override
     	public void onCreate(Bundle savedInstanceState){
     		super.onCreate(savedInstanceState);
-    		mUnitConverter = new UnitConverter(getActivity().getApplicationContext());
+    		mUnitConverter = new UnitConverter();
     	}
     	
         @Override
@@ -98,15 +101,24 @@ public class MainActivity extends Activity {
 				
 				@Override
 				public void onClick(View view) {
-					String unit = (String) mUnitSpinner.getSelectedItem();
-					String cat = (String) mCategorySpinner.getSelectedItem();
+					int unitIndex = mUnitSpinner.getSelectedItemPosition();
+					int categoryIndex = mCategorySpinner.getSelectedItemPosition();
 					String valueString = mEditText.getText().toString().trim();
-					String output;
+					String output = "";
+					LinkedHashMap<Integer, Double> result;
 					double value;
+					/*
+					String unit = (String) mUnitSpinner..getSelectedItem();
+					String cat = (String) mCategorySpinner.getSelectedItem();
+					*/
 					
 					if (! valueString.isEmpty()) {
 						value = Float.valueOf(valueString.trim()).floatValue();
-						output = mUnitConverter.convert(cat, unit, value);							
+						result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+						for (int k: result.keySet()) {
+							String unit = getActivity().getApplicationContext().getString(k);
+							output += result.get(k).toString() + " " + unit + "\n";
+						}
 					} else {
 						output = "NaN";
 					}
@@ -115,16 +127,13 @@ public class MainActivity extends Activity {
 				
 			});
         	
-        	populateSpinner(mCategorySpinner, R.array.cat_array);
+        	populateSpinner(mCategorySpinner, -1);
         	mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
         		
         		@Override
                 public void onItemSelected(AdapterView<?> parent, View view, 
                         int pos, long id) {
-                	String item = (String) parent.getItemAtPosition(pos);
-                	if (mUnitConverter.containsCategory(item)) {
-                		populateSpinner(mUnitSpinner, mUnitConverter.getCategoryId(item));
-                	}
+            		populateSpinner(mUnitSpinner, pos);
                 }
                 
         		@Override
@@ -141,9 +150,16 @@ public class MainActivity extends Activity {
             return rootView;
         }
 
-        public void populateSpinner(Spinner spinner, int aryId) {
-    		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-    			aryId, android.R.layout.simple_spinner_item);
+        public void populateSpinner(Spinner spinner, int pos) {
+        	ArrayList<Integer> unitIds = mUnitConverter.getUnits(pos);
+        	ArrayList<CharSequence> unitStrings = new ArrayList<CharSequence>();
+        	ArrayAdapter<CharSequence> adapter;
+
+        	for (Integer i : unitIds) {
+        		unitStrings.add(getActivity().getApplicationContext().getString(i));
+        	}
+        	
+        	adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, unitStrings);
     		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     		spinner.setAdapter(adapter);
         }

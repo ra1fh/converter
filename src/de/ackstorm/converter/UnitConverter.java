@@ -1,83 +1,131 @@
 package de.ackstorm.converter;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
-
-import android.content.Context;
 
 public class UnitConverter {
-	protected Map<String, Integer> mCategoryMap;
-	protected static Map<String, LinkedHashMap<String, Double>> mConverterMap;
+	protected ArrayList<Category> mList;
 	
-	public UnitConverter(Context c) {
-    	mCategoryMap = new HashMap<String, Integer>();
-    	mCategoryMap.put(c.getString(R.string.cat_torque), R.array.torque_array);
-    	mCategoryMap.put(c.getString(R.string.cat_mass),   R.array.mass_array);
-    	mCategoryMap.put(c.getString(R.string.cat_length), R.array.length_array);
-    	mCategoryMap.put(c.getString(R.string.cat_volume), R.array.volume_array);
+	public UnitConverter() {
+		Category cat;		
+
+		mList = new ArrayList<Category>();
 		
-    	mConverterMap = new HashMap<String, LinkedHashMap<String, Double>>();
+    	cat = new Category(R.string.cat_length);
+		cat.add(new Unit(R.string.unit_m,     1.0));
+		cat.add(new Unit(R.string.unit_km, 1000.0));
+		cat.add(new Unit(R.string.unit_yd,    0.9144));
+    	cat.add(new Unit(R.string.unit_in,    0.0254));
+    	cat.add(new Unit(R.string.unit_ft,    0.3048));
+    	cat.add(new Unit(R.string.unit_mi, 1609.344));
+    	cat.add(new Unit(R.string.unit_nmi,1853.184));
+    	mList.add(cat);
+		
+    	cat = new Category(R.string.cat_torque);
+    	cat.add(new Unit(R.string.unit_nm,    1.0));
+    	cat.add(new Unit(R.string.unit_inlbf, 0.1129848290276167));
+    	mList.add(cat);
     	
-    	LinkedHashMap<String, Double> unitMap;
-    	unitMap = new LinkedHashMap<String, Double>();
+    	cat = new Category(R.string.cat_mass);
+    	cat.add(new Unit(R.string.unit_kg,  1.0));
+    	cat.add(new Unit(R.string.unit_lb,  0.45359237));
+    	cat.add(new Unit(R.string.unit_oz,  0.028));
+    	mList.add(cat);
     	
-    	unitMap.put(c.getString(R.string.unit_m),     1.0);
-    	unitMap.put(c.getString(R.string.unit_km), 1000.0);
-    	unitMap.put(c.getString(R.string.unit_yd),    0.9144);
-    	unitMap.put(c.getString(R.string.unit_in),    0.0254);
-    	unitMap.put(c.getString(R.string.unit_ft),    0.3048);
-    	unitMap.put(c.getString(R.string.unit_mi), 1609.344);
-    	unitMap.put(c.getString(R.string.unit_nmi),1853.184);
-    	mConverterMap.put(c.getString(R.string.cat_length), unitMap);
-    	
-    	unitMap = new LinkedHashMap<String, Double>();
-    	unitMap.put(c.getString(R.string.unit_nm),    1.0);
-    	unitMap.put(c.getString(R.string.unit_inlbf), 0.1129848290276167);
-    	mConverterMap.put(c.getString(R.string.cat_torque), unitMap);
-    	
-    	unitMap = new LinkedHashMap<String, Double>();
-    	unitMap.put(c.getString(R.string.unit_m3), 1.0);
-    	unitMap.put(c.getString(R.string.unit_l),  0.001);
-    	unitMap.put(c.getString(R.string.unit_gal_us), 0.003785411784);
-    	unitMap.put(c.getString(R.string.unit_gal_imp), 0.00454609);
-    	mConverterMap.put(c.getString(R.string.cat_volume), unitMap);
-
-    	unitMap = new LinkedHashMap<String, Double>();
-    	unitMap.put(c.getString(R.string.unit_kg), 1.0);
-    	unitMap.put(c.getString(R.string.unit_lb),  0.45359237);
-    	unitMap.put(c.getString(R.string.unit_oz),  0.028);
-    	mConverterMap.put(c.getString(R.string.cat_mass), unitMap);
-
+    	cat = new Category(R.string.cat_volume);
+    	cat.add(new Unit(R.string.unit_m3,      1.0));
+    	cat.add(new Unit(R.string.unit_l,       0.001));
+    	cat.add(new Unit(R.string.unit_gal_us,  0.003785411784));
+    	cat.add(new Unit(R.string.unit_gal_imp, 0.00454609));
+    	mList.add(cat);
 	}
 
-	public Boolean containsCategory(String category){
-		return mCategoryMap.containsKey(category);
+	public ArrayList<Integer> getUnits(int pos) {
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		if (pos == -1) {
+			// special case: add resIds for the categories
+			for (Category c : mList) {
+				array.add(c.getRes());
+			}
+		} else {
+			// return list of units for category at pos
+			for (Unit u : mList.get(pos).getList()) {
+				array.add(u.getRes());
+			}
+		}
+		return array;
 	}
-	
-	public Integer getCategoryId(String category) {
-		return mCategoryMap.get(category);
-	}
-	
-	public String convert(String category, String unit, Double value){
-		String output = "";
-		double inputFactor;
+			
+	public LinkedHashMap<Integer, Double> convert(int category, int unit, Double value){
+		LinkedHashMap<Integer, Double> output = new LinkedHashMap<Integer, Double>();
+		ArrayList<Unit> list = null;
+		Unit inputUnit = null;
 		double result = 0;
 
-		if (mCategoryMap.containsKey(category)) {
-			LinkedHashMap<String, Double> unitMap;
-			unitMap = mConverterMap.get(category);
-			inputFactor = unitMap.get(unit);
-			
-			for (Map.Entry<String, Double> entry : unitMap.entrySet()) {
-				String k = entry.getKey();
-				double v = entry.getValue();
-				if (!k.equals(unit)) {
-					result = value / Double.valueOf(v) * inputFactor;
-					output += Double.toString(result) + " " + k + "\n";
-				}
+		list = mList.get(category).getList();
+		inputUnit = list.get(unit);
+
+		for (Unit u : list) {
+			if (u != inputUnit) {
+				result = value / Double.valueOf(u.getVal()) * inputUnit.getVal();
+				output.put(u.getRes(), result);
 			}
 		}
 		return output;
+	}
+	
+	public static class Category {
+		private int mRes;
+		private ArrayList<Unit> mList;
+
+		public Category(int res) {
+			mRes = res;
+			mList = new ArrayList<Unit>();
+		}
+		
+		/**
+		 * @return string resource id of the category
+		 */
+		public int getRes() {
+			return mRes;
+		}
+
+		public void add(Unit unit) {
+			mList.add(unit);
+		}
+		
+		public ArrayList<Unit> getList() {
+			return mList;
+		}
+	}
+	
+	public static class Unit {
+		private int mRes;
+		private double mVal;
+		private double mOffset;
+		
+		public int getRes() {
+			return mRes;
+		}
+
+		public double getVal() {
+			return mVal;
+		}
+		
+		public double getOffset() {
+			return mOffset;
+		}
+
+		public Unit(int res, double val, double offset) {
+			mRes = res;
+			mVal = val;
+			mOffset = offset;
+		}
+
+		public Unit(int res, double val) {
+			mRes = res;
+			mVal = val;
+			mOffset = 0;
+		}
 	}
 }
