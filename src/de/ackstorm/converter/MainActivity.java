@@ -7,6 +7,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -96,53 +98,76 @@ public class MainActivity extends Activity {
 			mCategorySpinner = (Spinner)  rootView.findViewById(R.id.category_spinner);
 	    	mEditText        = (EditText) rootView.findViewById(R.id.edit_message);
 	    	mOutputText      = (TextView) rootView.findViewById(R.id.output_text);
-            
-            mConvertButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View view) {
-					int unitIndex = mUnitSpinner.getSelectedItemPosition();
-					int categoryIndex = mCategorySpinner.getSelectedItemPosition();
-					String valueString = mEditText.getText().toString().trim();
-					String output = "";
-					LinkedHashMap<Integer, Double> result;
-					double value;
-					
-					if (! valueString.isEmpty()) {
-						value = Float.valueOf(valueString.trim()).floatValue();
-						result = mUnitConverter.convert(categoryIndex, unitIndex, value);
-						for (int k: result.keySet()) {
-							String unit = getActivity().getApplicationContext().getString(k);
-							output += result.get(k).toString() + " " + unit + "\n";
-						}
-					} else {
-						output = "NaN";
-					}
-					mOutputText.setText(output);
-				}
-				
-			});
-        	
+
+        	if (savedInstanceState != null)	{
+        		mOutputText.setText(savedInstanceState.getString(KEY_TEXT));
+        	}
         	populateSpinner(mCategorySpinner, -1);
+
         	mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
         		
         		@Override
                 public void onItemSelected(AdapterView<?> parent, View view, 
                         int pos, long id) {
             		populateSpinner(mUnitSpinner, pos);
+            		updateResult();
                 }
                 
         		@Override
                 public void onNothingSelected(AdapterView<?> parent) {
-                    // TODO Another interface callback
+        			updateResult();
                 }
 
         	});
-
-        	if (savedInstanceState != null)	{
-        		mOutputText.setText(savedInstanceState.getString(KEY_TEXT));
-        	}
         	
+        	mUnitSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+					updateResult();
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					updateResult();
+				}
+        		
+        	});
+
+	    	mConvertButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					updateResult();
+				}
+				
+			});
+
+        	mEditText.addTextChangedListener(new TextWatcher() {
+        		
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					updateResult();
+				}
+	    		
+	    	});
+                    	
             return rootView;
         }
 
@@ -158,6 +183,27 @@ public class MainActivity extends Activity {
         	adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, unitStrings);
     		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     		spinner.setAdapter(adapter);
+        }
+        
+        public void updateResult() {
+			int unitIndex = mUnitSpinner.getSelectedItemPosition();
+			int categoryIndex = mCategorySpinner.getSelectedItemPosition();
+			String valueString = mEditText.getText().toString().trim();
+			String output = "";
+			LinkedHashMap<Integer, Double> result;
+			double value;
+			
+			if (! valueString.isEmpty()) {
+				value = Float.valueOf(valueString.trim()).floatValue();
+				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+				for (int k: result.keySet()) {
+					String unit = getActivity().getApplicationContext().getString(k);
+					output += result.get(k).toString() + " " + unit + "\n";
+				}
+			} else {
+				output = "";
+			}
+			mOutputText.setText(output);
         }
 
     } /* class ConverterFragment */
