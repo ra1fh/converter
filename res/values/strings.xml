@@ -18,35 +18,58 @@
     
     <!-- Length -->
     
-    <string name="unit_m">m (metre)</string>
-    <string name="unit_km">km (metre)</string>
-    <string name="unit_yd">yd (yard)</string>
-    <string name="unit_in">in (inch)</string>
-    <string name="unit_ft">ft (foot)</string>
-    <string name="unit_mi">mi (mile)</string>
-    <string name="unit_nmi">nmi (naut. mile)</string>
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_in">in</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_mi">mi</string>
+    <string name="unit_nmi">nmi</string>
+
+    <string name="desc_m">metre</string>
+    <string name="desc_km">metre</string>
+    <string name="desc_yd">yard</string>
+    <string name="desc_in">inch</string>
+    <string name="desc_ft">foot</string>
+    <string name="desc_mi">mile</string>
+    <string name="desc_nmi">naut. mile</string> 
     
     <!-- Torque -->
     
     <string name="unit_nm">N\u2009m</string>
     <string name="unit_inlbf">in\u2009lbf</string>
     
+    <string name="desc_nm"></string>
+    <string name="desc_inlbf"></string>
+    
     <!-- Volume -->
     
-    <string name="unit_l">l (litre)</string>
-    <string name="unit_m3">m³ (cubic metre)</string>
-    <string name="unit_gal_us">gal (US gallon)</string>
-    <string name="unit_gal_imp">gal (imp. gallon)</string>
+    <string name="unit_l">l</string>
+    <string name="unit_m3">m³</string>
+    <string name="unit_gal_us">gal</string>
+    <string name="unit_gal_imp">imp gal</string>
+    
+    <string name="desc_l">litre</string>
+    <string name="desc_m3">cubic metre</string>
+    <string name="desc_gal_us">US gallon</string>
+    <string name="desc_gal_imp">imp. gallon</string>
     
     <!-- Mass -->
     
     <string name="unit_kg">kg</string>
-    <string name="unit_lb">lb (pound)</string>
-    <string name="unit_oz">oz (US)</string>
+    <string name="unit_lb">lb</string>
+    <string name="unit_oz">oz</string>
+    
+    <string name="desc_kg"></string>
+    <string name="desc_lb">pound</string>
+    <string name="desc_oz">US</string>
     
     <!-- Temperature -->
     
     <string name="unit_celsius">°C</string>
     <string name="unit_fahrenheit">°F</string>
+
+    <string name="desc_celsius">Celsius</string>
+    <string name="desc_fahrenheit">Fahrenheit</string>
     
 </resources>

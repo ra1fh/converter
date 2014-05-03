@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import de.ackstorm.converter.UnitConverter.Unit;
 import de.ackstorm.converter.UnitConverter.UnitValue;
 
 public class MainActivity extends Activity {
@@ -115,19 +116,19 @@ public class MainActivity extends Activity {
                 Log.d(TAG, "onCreateView: uni="+ savedInstanceState.getInt(KEY_UNIT));
         		
         		/* mOutputText.setText(savedInstanceState.getString(KEY_TEXT)); */
-            	populateSpinner(mCategorySpinner, -1);
+            	populateCategorySpinner();
             	// TODO this doesn't seem to work
-            	populateSpinner(mUnitSpinner, savedInstanceState.getInt(KEY_CATEGORY));
+            	populateUnitSpinner(savedInstanceState.getInt(KEY_CATEGORY));
             	mUnitSpinner.setSelection(savedInstanceState.getInt(KEY_UNIT));
         	}
-        	populateSpinner(mCategorySpinner, -1);
+        	populateCategorySpinner();
 
         	mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
         		
         		@Override
                 public void onItemSelected(AdapterView<?> parent, View view, 
-                        int pos, long id) {
-            		populateSpinner(mUnitSpinner, pos);
+                        int category, long id) {
+            		populateUnitSpinner(category);
             		updateResult();
                 }
                 
@@ -189,28 +190,57 @@ public class MainActivity extends Activity {
             return rootView;
         }
 
-        public void populateSpinner(Spinner spinner, int pos) {
-        	ArrayList<Integer> unitIds = mUnitConverter.getUnits(pos);
-        	ArrayList<CharSequence> unitStrings = new ArrayList<CharSequence>();
+        public void populateSpinner(Spinner spinner, ArrayList<CharSequence> strings) {
         	ArrayAdapter<CharSequence> adapter;
-
-        	Log.d(TAG, "populateSpinner: pos=" + pos);
-
-        	for (Integer i : unitIds) {
-        		unitStrings.add(getActivity().getApplicationContext().getString(i));
-        	}
         	
-        	adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, unitStrings);
+        	adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, strings);
     		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     		spinner.setAdapter(adapter);
         }
         
+        public void populateCategorySpinner() {
+        	ArrayList<Integer> categoryIds;
+           	ArrayList<CharSequence> categoryStrings;
+
+        	Log.d(TAG, "populateCategorySpinner");
+           	categoryIds = mUnitConverter.getCategories();
+        	categoryStrings = new ArrayList<CharSequence>();
+
+        	for (Integer i : categoryIds) {
+        		categoryStrings.add(getActivity().getApplicationContext().getString(i));
+        	}
+        	populateSpinner(mCategorySpinner, categoryStrings);
+        }
+
+        public void populateUnitSpinner(int category) {
+        	ArrayList<Unit> units;
+           	ArrayList<CharSequence> unitStrings;
+
+        	Log.d(TAG, "populateUnitSpinner(" + category + ")");
+           	units = mUnitConverter.getUnits(category);
+        	unitStrings = new ArrayList<CharSequence>();
+
+        	for (Unit u : units) {
+        		String unit = getActivity().getApplicationContext().getString(u.getUnitId());
+        		String desc = getActivity().getApplicationContext().getString(u.getDescId());
+        		if (! desc.trim().isEmpty()) {
+            		unit += " (";
+            		unit += desc;
+            		unit += ")";
+        		}
+        		unitStrings.add(unit);
+        	}
+        	populateSpinner(mUnitSpinner, unitStrings);
+        }
+
         public void updateResult() {
-			ArrayList<UnitValue> result = null;
+			ArrayList<UnitValue> result = new ArrayList<UnitValue>();
 			double value;
 			String valueString;
 			int unitIndex = mUnitSpinner.getSelectedItemPosition();
 			int categoryIndex = mCategorySpinner.getSelectedItemPosition();
+
+			Log.d(TAG, "updateResult unitIndex=" + unitIndex + " categoryIndex=" + categoryIndex);
 			
 			if (unitIndex < 0 || categoryIndex < 0) {
 				// might happen when TextEdit is modified
@@ -226,20 +256,19 @@ public class MainActivity extends Activity {
 			if (valueString.isEmpty()) {
 				/* mOutputText.setText(""); */
 	            Log.d(TAG, "updateResult: empty valueString");
-	            return;
-			}
-			
-			try {
-				value = Float.valueOf(valueString.trim()).floatValue();
-				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+			} else { 
+				try {
+					value = Float.valueOf(valueString.trim()).floatValue();
+					result = mUnitConverter.convert(categoryIndex, unitIndex, value);
 				/*
 				for (int k: result.keySet()) {
 					String unit = getActivity().getApplicationContext().getString(k);
 					output += result.get(k).toString() + " " + unit + "\n";
 				}
 				*/
-			} catch (NumberFormatException e) {
-	            Log.d(TAG, "updateResult: invalid number format");
+				} catch (NumberFormatException e) {
+					Log.d(TAG, "updateResult: invalid number format");
+				}
 			}
 			/*
 			ArrayAdapter<UnitValue> adapter =
