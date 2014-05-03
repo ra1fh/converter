@@ -268,7 +268,7 @@ public class MainActivity extends Activity {
         		UnitValue v = getItem(position);
         		
         		TextView valueTextView = (TextView) convertView.findViewById(R.id.list_item_value);
-        		valueTextView.setText(v.getVal().toString());
+        		valueTextView.setText(Float.valueOf(v.getVal().floatValue()).toString());
         		
         		TextView unitTextView = (TextView) convertView.findViewById(R.id.list_item_unit);
         		unitTextView.setText(convertView.getContext().getString(v.getUnit()));
