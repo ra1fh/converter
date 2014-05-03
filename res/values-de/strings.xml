@@ -19,12 +19,12 @@
     <!-- Length -->
     
     <string name="unit_m">m (Meter)</string>
-    <string name="unit_km">km (Meter)</string>
+    <string name="unit_km">km (Kilometer)</string>
     <string name="unit_yd">yd (Yard)</string>
     <string name="unit_in">in (Inch)</string>
     <string name="unit_ft">ft (Foot)</string>
     <string name="unit_mi">mi (Meilen)</string>
-    <string name="unit_nmi">nmi (Nautische Meilen)</string>
+    <string name="unit_nmi">nmi (naut. Meilen)</string>
     
     <!-- Torque -->
     
@@ -36,11 +36,11 @@
     <string name="unit_l">l (Liter)</string>
     <string name="unit_m3">m³ (Kubikmeter)</string>
     <string name="unit_gal_us">gal (US Gallonen)</string>
-    <string name="unit_gal_imp">gal (Imperiale Gallonen)</string>
+    <string name="unit_gal_imp">gal (imp. Gallonen)</string>
     
     <!-- Mass -->
     
-    <string name="unit_kg">kg</string>
+    <string name="unit_kg">kg (Kilogramm)</string>
     <string name="unit_lb">lb (Pound)</string>
     <string name="unit_oz">oz (US Unzen)</string>
     
