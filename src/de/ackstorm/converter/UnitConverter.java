@@ -1,7 +1,8 @@
 package de.ackstorm.converter;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 public class UnitConverter {
 	protected ArrayList<Category> mList;
@@ -62,8 +63,8 @@ public class UnitConverter {
 		return array;
 	}
 			
-	public LinkedHashMap<Integer, Double> convert(int category, int unit, Double inputValue){
-		LinkedHashMap<Integer, Double> output = new LinkedHashMap<Integer, Double>();
+	public ArrayList<UnitValue> convert(int category, int unit, Double inputValue){
+		ArrayList<UnitValue> output = new ArrayList<UnitValue>();
 		ArrayList<Unit> list = null;
 		Unit inputUnit = null;
 		double result = 0;
@@ -74,10 +75,35 @@ public class UnitConverter {
 		for (Unit u : list) {
 			if (u != inputUnit) {
 				result = ((inputValue + inputUnit.getOffset())/ Double.valueOf(u.getVal()) * inputUnit.getVal()) - u.getOffset();
-				output.put(u.getRes(), result);
+				output.add(new UnitValue(result, u.getRes()));
 			}
 		}
 		return output;
+	}
+	
+	public static class UnitValue extends SimpleEntry<Double, Integer> {
+
+		public UnitValue(SimpleEntry<Double, Integer> value) {
+			super(value);
+		}
+		
+		public UnitValue(Double value, Integer unit) {
+			this(new SimpleEntry<Double, Integer>(value, unit));
+		}
+
+		public Integer getUnit() {
+			return super.getValue();
+		}
+		
+		public Double getVal() {
+			return super.getKey();
+		}
+		
+		public String toString() {
+			return getVal().toString();
+		}
+		
+		private static final long serialVersionUID = 1L;
 	}
 	
 	public static class Category {

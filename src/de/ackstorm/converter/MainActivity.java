@@ -1,7 +1,6 @@
 package de.ackstorm.converter;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -20,8 +19,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import de.ackstorm.converter.UnitConverter.UnitValue;
 
 public class MainActivity extends Activity {
 
@@ -71,14 +72,21 @@ public class MainActivity extends Activity {
     	protected Spinner mUnitSpinner;
     	protected Spinner mCategorySpinner;
     	protected EditText mEditText;
-    	protected TextView mOutputText;
+    	/* protected TextView mOutputText; */
+    	protected ListView mOutputList;
     	
     	private static final String KEY_TEXT = "text";
+    	private static final String KEY_CATEGORY = "category";
+    	private static final String KEY_UNIT = "unit";
     	
         @Override
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
-            outState.putString(KEY_TEXT, mOutputText.getText().toString());
+            /* outState.putString(KEY_TEXT, mOutputText.getText().toString()); */
+            outState.putInt(KEY_CATEGORY, mCategorySpinner.getSelectedItemPosition());
+            outState.putInt(KEY_UNIT, mUnitSpinner.getSelectedItemPosition());
+            Log.d(TAG, "onSaveInstanceState cat=" + mCategorySpinner.getSelectedItemPosition());
+            Log.d(TAG, "onSaveInstanceState uni=" + mUnitSpinner.getSelectedItemPosition());
         }
     	
     	@Override
@@ -97,11 +105,20 @@ public class MainActivity extends Activity {
 			mUnitSpinner     = (Spinner)  rootView.findViewById(R.id.unit_spinner);
 			mCategorySpinner = (Spinner)  rootView.findViewById(R.id.category_spinner);
 	    	mEditText        = (EditText) rootView.findViewById(R.id.edit_message);
-	    	mOutputText      = (TextView) rootView.findViewById(R.id.output_text);
+	    	/* mOutputText      = (TextView) rootView.findViewById(R.id.output_text); */
+	    	mOutputList      = (ListView) rootView.findViewById(R.id.output_list);
 
             Log.d(TAG, "onCreateView");
         	if (savedInstanceState != null)	{
-        		mOutputText.setText(savedInstanceState.getString(KEY_TEXT));
+                Log.d(TAG, "onCreateView: text="+ savedInstanceState.getString(KEY_TEXT));
+                Log.d(TAG, "onCreateView: cat="+ savedInstanceState.getInt(KEY_CATEGORY));
+                Log.d(TAG, "onCreateView: uni="+ savedInstanceState.getInt(KEY_UNIT));
+        		
+        		/* mOutputText.setText(savedInstanceState.getString(KEY_TEXT)); */
+            	populateSpinner(mCategorySpinner, -1);
+            	// TODO this doesn't seem to work
+            	populateSpinner(mUnitSpinner, savedInstanceState.getInt(KEY_CATEGORY));
+            	mUnitSpinner.setSelection(savedInstanceState.getInt(KEY_UNIT));
         	}
         	populateSpinner(mCategorySpinner, -1);
 
@@ -177,6 +194,8 @@ public class MainActivity extends Activity {
         	ArrayList<CharSequence> unitStrings = new ArrayList<CharSequence>();
         	ArrayAdapter<CharSequence> adapter;
 
+        	Log.d(TAG, "populateSpinner: pos=" + pos);
+
         	for (Integer i : unitIds) {
         		unitStrings.add(getActivity().getApplicationContext().getString(i));
         	}
@@ -187,8 +206,8 @@ public class MainActivity extends Activity {
         }
         
         public void updateResult() {
-			LinkedHashMap<Integer, Double> result;
-			String output;
+			ArrayList<UnitValue> result = null;
+			ArrayList<UnitValue> output = null;
 			double value;
 			String valueString;
 			int unitIndex = mUnitSpinner.getSelectedItemPosition();
@@ -198,7 +217,7 @@ public class MainActivity extends Activity {
 				// might happen when TextEdit is modified
 				// before Spinners are populated (seen when
 				// switching between landscape and portrait
-				mOutputText.setText("");
+				/* mOutputText.setText(""); */
 	            Log.d(TAG, "updateResult: invalid index");
 	            return;
 			}
@@ -206,25 +225,56 @@ public class MainActivity extends Activity {
 			valueString = mEditText.getText().toString().trim();
 
 			if (valueString.isEmpty()) {
-				mOutputText.setText("");
+				/* mOutputText.setText(""); */
 	            Log.d(TAG, "updateResult: empty valueString");
 	            return;
 			}
 			
-			output = "";
 			try {
 				value = Float.valueOf(valueString.trim()).floatValue();
-			
 				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
+				/*
 				for (int k: result.keySet()) {
 					String unit = getActivity().getApplicationContext().getString(k);
 					output += result.get(k).toString() + " " + unit + "\n";
 				}
+				*/
 			} catch (NumberFormatException e) {
 	            Log.d(TAG, "updateResult: invalid number format");
 			}
-			mOutputText.setText(output);
+			/*
+			ArrayAdapter<UnitValue> adapter =
+					new ArrayAdapter<UnitValue>(getActivity(),
+							android.R.layout.simple_list_item_1,
+							result);
+			*/
+			ResultAdapter adapter = new ResultAdapter(result);
+			mOutputList.setAdapter(adapter);
         }
+        
+        private class ResultAdapter extends ArrayAdapter<UnitValue> {
 
+        	public ResultAdapter(ArrayList<UnitValue> values) {
+        		super(getActivity(), 0, values);
+        	}
+        	
+        	@Override
+        	public View getView(int position, View convertView, ViewGroup parent) {
+        		if (convertView == null) {
+        			convertView = getActivity().getLayoutInflater()
+        					.inflate(R.layout.list_item_result, null);
+        		}
+        		
+        		UnitValue v = getItem(position);
+        		
+        		TextView valueTextView = (TextView) convertView.findViewById(R.id.list_item_value);
+        		valueTextView.setText(v.getVal().toString());
+        		
+        		TextView unitTextView = (TextView) convertView.findViewById(R.id.list_item_unit);
+        		unitTextView.setText(convertView.getContext().getString(v.getUnit()));
+        		return convertView;
+        	}
+        }
+        
     } /* class ConverterFragment */
 }
