@@ -207,7 +207,6 @@ public class MainActivity extends Activity {
         
         public void updateResult() {
 			ArrayList<UnitValue> result = null;
-			ArrayList<UnitValue> output = null;
 			double value;
 			String valueString;
 			int unitIndex = mUnitSpinner.getSelectedItemPosition();

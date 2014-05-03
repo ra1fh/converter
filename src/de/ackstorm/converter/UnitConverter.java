@@ -2,7 +2,6 @@ package de.ackstorm.converter;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 public class UnitConverter {
 	protected ArrayList<Category> mList;
