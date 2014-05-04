@@ -128,13 +128,15 @@ public class MainActivity extends Activity {
             		 * Prevent this by only changing the unit spinner if the current pos
             		 * is different from what has been set from saved state.
             		 */
-                    if (mSavedCategory != null) {
-                    	if (mSavedCategory != category) {
-                        	populateUnitSpinner(category);
+        			if (mSavedCategory != null) {
+        				if (mSavedCategory != category) {
                         	mSavedCategory = null;
-                    	}
+                        	populateUnitSpinner(category);
+        				}
+        			} else {
+                    	populateUnitSpinner(category);
         			}
-            		updateResult();
+        			updateResult();
                 }
                 
         		@Override
