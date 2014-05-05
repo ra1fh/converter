@@ -11,38 +11,58 @@
     <!-- Category -->
     
     <string name="cat_length">Länge</string>
-    <string name="cat_torque">Drehmoment</string>
+    <string name="cat_area">Fläche</string>
     <string name="cat_volume">Volumen</string>
+    <string name="cat_torque">Drehmoment</string>
     <string name="cat_mass">Masse</string>
     <string name="cat_temperature">Temperatur</string>
+    <string name="cat_speed">Geschwindigkeit</string>
     
     <!-- Length -->
     
+    <string name="desc_mm">Millimeter</string>
     <string name="desc_m">Meter</string>
     <string name="desc_km">Kilometer</string>
     <string name="desc_yd">Yard</string>
     <string name="desc_in">Inch</string>
-    <string name="desc_ft">Foot</string>
-    <string name="desc_mi">Meilen</string>
-    <string name="desc_nmi">naut. Meilen</string>
+    <string name="desc_ft">Fuß</string>
+    <string name="desc_mi">Meile</string>
+    <string name="desc_nmi">Nautische Meile</string>
+    <string name="desc_ly">Lichtjahr</string>
+    
+    <!-- Area -->
+    
+    <string name="desc_yd2">Quadratyard</string>
+    <string name="desc_m2">Quadratmeter</string>
+    <string name="desc_ha">Hektar</string>
+    <string name="desc_km2">Quadratkilometer</string>
+    <string name="desc_ac">Acre</string>
+    <string name="desc_mi2">Quadratmeile</string>
+    
+    <!-- Volume -->
+    
+    <string name="desc_l">Liter</string>
+    <string name="desc_m3">Kubikmeter</string>
+    <string name="desc_gal_us">US Gallone</string>
+    <string name="desc_gal_imp">Imperiale Gallone</string>
     
     <!-- Torque -->
     
     <string name="desc_nm"></string>
     <string name="desc_inlbf"></string>
     
-    <!-- Volume -->
-    
-    <string name="desc_l">Liter</string>
-    <string name="desc_m3">Kubikmeter</string>
-    <string name="desc_gal_us">US Gallonen</string>
-    <string name="desc_gal_imp">imp. Gallonen</string>
-    
     <!-- Mass -->
     
     <string name="desc_kg">Kilogramm</string>
     <string name="desc_lb">Pound</string>
-    <string name="desc_oz">US Unzen</string>
+    <string name="desc_oz">US Unze</string>
+    
+    <!-- Speed -->
+    
+    <string name="desc_mps">Meter pro Sekunde</string>
+    <string name="desc_kmh">Kilometer pro Stunde</string>
+    <string name="desc_mph">Meilen pro Stunde</string>
+    <string name="desc_knot">Knoten</string>
     
     
 </resources>

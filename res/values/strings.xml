@@ -11,36 +11,50 @@
     <!-- Category -->
     
     <string name="cat_length">Length</string>
-    <string name="cat_torque">Torque</string>
+    <string name="cat_area">Area</string>
     <string name="cat_volume">Volume</string>
+    <string name="cat_torque">Torque</string>
     <string name="cat_mass">Mass</string>
     <string name="cat_temperature">Temperature</string>
+    <string name="cat_speed">Speed</string>
     
     <!-- Length -->
     
+    <string name="unit_mm">mm</string>
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
-    <string name="unit_yd">yd</string>
     <string name="unit_in">in</string>
     <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
     <string name="unit_nmi">nmi</string>
-
+    <string name="unit_ly">ly</string>
+    
+    <string name="desc_mm">millimetre</string>
     <string name="desc_m">metre</string>
-    <string name="desc_km">metre</string>
+    <string name="desc_km">kilometre</string>
     <string name="desc_yd">yard</string>
     <string name="desc_in">inch</string>
     <string name="desc_ft">foot</string>
     <string name="desc_mi">mile</string>
-    <string name="desc_nmi">naut. mile</string> 
+    <string name="desc_nmi">nautical mile</string> 
+    <string name="desc_ly">light-year</string>
+
+    <!-- Area -->
     
-    <!-- Torque -->
+    <string name="unit_yd2">yd²</string>
+    <string name="unit_m2">m²</string>
+    <string name="unit_ha">ha</string>
+    <string name="unit_km2">km²</string>
+    <string name="unit_ac">ac</string>
+    <string name="unit_mi2">mi²</string>
     
-    <string name="unit_nm">N\u2009m</string>
-    <string name="unit_inlbf">in\u2009lbf</string>
-    
-    <string name="desc_nm"></string>
-    <string name="desc_inlbf"></string>
+    <string name="desc_yd2">square yard</string>
+    <string name="desc_m2">square metre</string>
+    <string name="desc_ha">hectare</string>
+    <string name="desc_km2">square kilometre</string>
+    <string name="desc_ac">acre</string>
+    <string name="desc_mi2">square mile</string>
     
     <!-- Volume -->
     
@@ -53,6 +67,16 @@
     <string name="desc_m3">cubic metre</string>
     <string name="desc_gal_us">US gallon</string>
     <string name="desc_gal_imp">imp. gallon</string>
+    
+    <!-- Torque -->
+    
+    <string name="unit_nm">N\u2009m</string>
+    <string name="unit_inlbf">in\u2009lbf</string>
+    <string name="unit_ftlbf">ft\u2009lbf</string>
+    
+    <string name="desc_nm"></string>
+    <string name="desc_inlbf"></string>
+    <string name="desc_ftlbf"></string>
     
     <!-- Mass -->
     
@@ -68,8 +92,22 @@
     
     <string name="unit_celsius">°C</string>
     <string name="unit_fahrenheit">°F</string>
+    <string name="unit_kelvin">K</string>
 
     <string name="desc_celsius">Celsius</string>
     <string name="desc_fahrenheit">Fahrenheit</string>
+    <string name="desc_kelvin">Kelvin</string>
+    
+    <!-- Speed -->
+    
+    <string name="unit_mps">m/s</string>
+    <string name="unit_kmh">km/h</string>
+    <string name="unit_mph">mph</string>
+    <string name="unit_knot">knot</string>
+    
+    <string name="desc_mps">metre per second</string>
+    <string name="desc_kmh">kilometre per hour</string>
+    <string name="desc_mph">mile per hour</string>
+    <string name="desc_knot"></string>
     
 </resources>

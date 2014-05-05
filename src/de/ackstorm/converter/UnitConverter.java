@@ -11,26 +11,26 @@ public class UnitConverter {
 
 		mList = new ArrayList<Category>();
     	cat = new Category(R.string.cat_length);
-		cat.add(new Unit(R.string.unit_m,  R.string.desc_m,     1.0));
+		cat.add(new Unit(R.string.unit_mm, R.string.desc_mm,    0.001));		
+		cat.add(new Unit(R.string.unit_m,  R.string.desc_m,     1.0));		
 		cat.add(new Unit(R.string.unit_km, R.string.desc_km, 1000.0));
-		cat.add(new Unit(R.string.unit_yd, R.string.desc_yd,    0.9144));
     	cat.add(new Unit(R.string.unit_in, R.string.desc_in,    0.0254));
     	cat.add(new Unit(R.string.unit_ft, R.string.desc_ft,    0.3048));
+		cat.add(new Unit(R.string.unit_yd, R.string.desc_yd,    0.9144));
     	cat.add(new Unit(R.string.unit_mi, R.string.desc_mi, 1609.344));
     	cat.add(new Unit(R.string.unit_nmi,R.string.desc_nmi,1853.184));
+    	cat.add(new Unit(R.string.unit_ly, R.string.desc_ly,    9.4607304725808e15));
+    	mList.add(cat);
+    	
+    	cat = new Category(R.string.cat_area);
+    	cat.add(new Unit(R.string.unit_yd2,  R.string.desc_yd2,      0.83612736));
+    	cat.add(new Unit(R.string.unit_m2,  R.string.desc_m2,        1.0));
+    	cat.add(new Unit(R.string.unit_ac,  R.string.desc_ac,     4046.8564224));
+    	cat.add(new Unit(R.string.unit_ha,  R.string.desc_ha,    10000.0));
+    	cat.add(new Unit(R.string.unit_km2, R.string.desc_km2, 1000000.0));
+    	cat.add(new Unit(R.string.unit_mi2,  R.string.desc_mi2,  2.589988110336e6));
     	mList.add(cat);
 		
-    	cat = new Category(R.string.cat_torque);
-    	cat.add(new Unit(R.string.unit_nm,    R.string.desc_nm,    1.0));
-    	cat.add(new Unit(R.string.unit_inlbf, R.string.desc_inlbf, 0.1129848290276167));
-    	mList.add(cat);
-    	
-    	cat = new Category(R.string.cat_mass);
-    	cat.add(new Unit(R.string.unit_kg,  R.string.desc_kg, 1.0));
-    	cat.add(new Unit(R.string.unit_lb,  R.string.desc_lb, 0.45359237));
-    	cat.add(new Unit(R.string.unit_oz,  R.string.desc_oz, 0.028));
-    	mList.add(cat);
-    	
     	cat = new Category(R.string.cat_volume);
     	cat.add(new Unit(R.string.unit_m3,      R.string.desc_m3,      1.0));
     	cat.add(new Unit(R.string.unit_l,       R.string.desc_l,       0.001));
@@ -38,11 +38,32 @@ public class UnitConverter {
     	cat.add(new Unit(R.string.unit_gal_imp, R.string.desc_gal_imp, 0.00454609));
     	mList.add(cat);
     	
+    	cat = new Category(R.string.cat_torque);
+    	cat.add(new Unit(R.string.unit_inlbf, R.string.desc_inlbf, 0.1129848290276167));
+    	cat.add(new Unit(R.string.unit_nm,    R.string.desc_nm,    1.0));
+    	cat.add(new Unit(R.string.unit_ftlbf, R.string.desc_ftlbf, 1.3558179483314004));
+    	mList.add(cat);
+          	
+    	cat = new Category(R.string.cat_mass);
+    	cat.add(new Unit(R.string.unit_kg,  R.string.desc_kg, 1.0));
+    	cat.add(new Unit(R.string.unit_lb,  R.string.desc_lb, 0.45359237));
+    	cat.add(new Unit(R.string.unit_oz,  R.string.desc_oz, 0.028));
+    	mList.add(cat);
+    	
     	cat = new Category(R.string.cat_temperature);
-    	cat.add(new Unit(R.string.unit_celsius,    R.string.desc_celsius,        1.0,   0.0));
-    	cat.add(new Unit(R.string.unit_fahrenheit, R.string.desc_fahrenheit, 5.0/9.0, -32.0));
+    	cat.add(new Unit(R.string.unit_celsius,    R.string.desc_celsius,        1.0,    0.0));
+    	cat.add(new Unit(R.string.unit_fahrenheit, R.string.desc_fahrenheit, 5.0/9.0,  -32.0));
+    	cat.add(new Unit(R.string.unit_kelvin, R.string.desc_kelvin,             1.0, -273.15));
     	mList.add(cat);
 
+    	cat = new Category(R.string.cat_speed);
+    	cat.add(new Unit(R.string.unit_mps,    R.string.desc_mps,        1.0));
+    	cat.add(new Unit(R.string.unit_kmh,    R.string.desc_kmh,    1.0/3.6));
+    	cat.add(new Unit(R.string.unit_mph,    R.string.desc_mph,    0.44704));
+    	cat.add(new Unit(R.string.unit_knot,   R.string.desc_knot,  0.514444));
+    	mList.add(cat);
+
+	
 	}
 
 	public ArrayList<Integer> getCategories() {
