@@ -51,10 +51,7 @@
     <string name="desc_gal_imp">Imperiale Gallone</string>
     
     <!-- Torque -->
-    
-    <string name="desc_nm"></string>
-    <string name="desc_inlbf"></string>
-    
+
     <!-- Mass -->
     
     <string name="desc_kg">Kilogramm</string>
@@ -72,10 +69,10 @@
 
     <string name="unit_euro">€</string>
     <string name="unit_dollar">$</string>
-    <string name="unit_rupia">&#8377;</string>
+    <string name="unit_rupee">&#8377;</string>
 
     <string name="desc_euro">Euro</string>
     <string name="desc_dollar">Dollar</string>
-    <string name="desc_rupia">Rupie</string>
+    <string name="desc_rupee">Rupie</string>
 
 </resources>
