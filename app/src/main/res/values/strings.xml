@@ -2,10 +2,13 @@
 <resources>
 
     <string name="app_name">Converter</string>
-    <string name="app_tagline">Unit conversion made easy</string>
+    <string name="app_tagline">Unit conversion</string>
+    <string name="action_about">Info</string>
     <string name="action_settings">Settings</string>
     <string name="button_send">Convert</string>
-    
+    <string name="app_descrip">Desc</string>
+    <string name="app_credits">Cred</string>
+
     <!-- \u2009 == &thinsp; -->
     
     <!-- Category -->
@@ -17,6 +20,7 @@
     <string name="cat_mass">Mass</string>
     <string name="cat_temperature">Temperature</string>
     <string name="cat_speed">Speed</string>
+    <string name="cat_currency">Curreny</string>
     
     <!-- Length -->
     
@@ -109,5 +113,14 @@
     <string name="desc_kmh">kilometre per hour</string>
     <string name="desc_mph">mile per hour</string>
     <string name="desc_knot"></string>
-    
+
+    <!-- Currency -->
+
+    <string name="unit_euro">€</string>
+    <string name="unit_dollar">$</string>
+    <string name="unit_rupee">&#8377;</string>
+
+    <string name="desc_euro">Euro</string>
+    <string name="desc_dollar">Dollar</string>
+    <string name="desc_rupee">Rupee</string>
 </resources>

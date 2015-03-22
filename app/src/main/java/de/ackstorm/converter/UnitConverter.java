@@ -63,7 +63,12 @@ public class UnitConverter {
     	cat.add(new Unit(R.string.unit_knot,   R.string.desc_knot,  0.514444));
     	mList.add(cat);
 
-	
+        cat = new Category(R.string.cat_currency);
+        cat.add(new Unit(R.string.unit_euro,    R.string.desc_euro,        1.0000));
+        cat.add(new Unit(R.string.unit_dollar,  R.string.desc_dollar,      0.8861));
+        cat.add(new Unit(R.string.unit_rupee,   R.string.desc_rupee,       0.0142));
+        mList.add(cat);
+
 	}
 
 	public ArrayList<Integer> getCategories() {

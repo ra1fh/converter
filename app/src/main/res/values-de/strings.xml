@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Konverter</string>
-    <string name="app_tagline">Einfaches umrechnen von Einheiten</string>
+    <string name="app_name">Converter</string>
+    <string name="app_tagline">Umrechnen von Einheiten</string>
+    <string name="action_about">Info</string>
     <string name="action_settings">Einstellungen</string>
     <string name="button_send">Konvertieren</string>
-    
+
+    <string name="app_descrip">Desc</string>
+    <string name="app_credits">Cred</string>
     <!-- \u2009 == &thinsp; -->
     
     <!-- Category -->
@@ -17,7 +20,8 @@
     <string name="cat_mass">Masse</string>
     <string name="cat_temperature">Temperatur</string>
     <string name="cat_speed">Geschwindigkeit</string>
-    
+    <string name="cat_currency">Währung</string>
+
     <!-- Length -->
     
     <string name="desc_mm">Millimeter</string>
@@ -63,6 +67,15 @@
     <string name="desc_kmh">Kilometer pro Stunde</string>
     <string name="desc_mph">Meilen pro Stunde</string>
     <string name="desc_knot">Knoten</string>
-    
-    
+
+    <!-- Currency -->
+
+    <string name="unit_euro">€</string>
+    <string name="unit_dollar">$</string>
+    <string name="unit_rupia">&#8377;</string>
+
+    <string name="desc_euro">Euro</string>
+    <string name="desc_dollar">Dollar</string>
+    <string name="desc_rupia">Rupie</string>
+
 </resources>
