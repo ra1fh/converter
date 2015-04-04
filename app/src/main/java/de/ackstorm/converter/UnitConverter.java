@@ -3,13 +3,13 @@ package de.ackstorm.converter;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
-public class UnitConverter {
-	protected ArrayList<Category> mList;
+class UnitConverter {
+	private final ArrayList<Category> mList;
 	
 	public UnitConverter() {
 		Category cat;		
 
-		mList = new ArrayList<Category>();
+		mList = new ArrayList<>();
     	cat = new Category(R.string.cat_length);
 		cat.add(new Unit(R.string.unit_mm, R.string.desc_mm,    0.001));		
 		cat.add(new Unit(R.string.unit_m,  R.string.desc_m,     1.0));		
@@ -72,15 +72,15 @@ public class UnitConverter {
 	}
 
 	public ArrayList<Integer> getCategories() {
-		ArrayList<Integer> array = new ArrayList<Integer>();
+		ArrayList<Integer> array = new ArrayList<>();
 		for (Category c : mList) {
-			array.add(c.getCagtoryId());
+			array.add(c.getCategoryId());
 		}
 		return array;
 	}
 	
 	public ArrayList<Unit> getUnits(int pos) {
-		ArrayList<Unit> array = new ArrayList<Unit>();
+		ArrayList<Unit> array = new ArrayList<>();
 		for (Unit u : mList.get(pos).getList()) {
 			array.add(u);
 		}
@@ -88,17 +88,17 @@ public class UnitConverter {
 	}
 			
 	public ArrayList<UnitValue> convert(int category, int unit, Double inputValue){
-		ArrayList<UnitValue> output = new ArrayList<UnitValue>();
-		ArrayList<Unit> list = null;
-		Unit inputUnit = null;
-		double result = 0;
+		ArrayList<UnitValue> output = new ArrayList<>();
+		ArrayList<Unit> list;
+		Unit inputUnit;
+		double result;
 
 		list = mList.get(category).getList();
 		inputUnit = list.get(unit);
 
 		for (Unit u : list) {
 			if (u != inputUnit) {
-				result = ((inputValue + inputUnit.getOffset())/ Double.valueOf(u.getFactor()) * inputUnit.getFactor()) - u.getOffset();
+				result = ((inputValue + inputUnit.getOffset())/ u.getFactor() * inputUnit.getFactor()) - u.getOffset();
 				output.add(new UnitValue(result, u.getUnitId()));
 			}
 		}
@@ -112,7 +112,7 @@ public class UnitConverter {
 		}
 		
 		public UnitValue(Double value, Integer unit) {
-			this(new SimpleEntry<Double, Integer>(value, unit));
+			this(new SimpleEntry<>(value, unit));
 		}
 
 		public Integer getUnit() {
@@ -127,22 +127,22 @@ public class UnitConverter {
 			return getVal().toString();
 		}
 		
-		private static final long serialVersionUID = 1L;
+		// --Commented out by Inspection (3/25/15 12:49 PM):private static final long serialVersionUID = 1L;
 	}
 	
 	public static class Category {
-		private int mCategoryId;
-		private ArrayList<Unit> mList;
+		private final int mCategoryId;
+		private final ArrayList<Unit> mList;
 
 		public Category(int res) {
 			mCategoryId = res;
-			mList = new ArrayList<Unit>();
+			mList = new ArrayList<>();
 		}
 		
 		/**
 		 * @return string resource id of the category
 		 */
-		public int getCagtoryId() {
+		public int getCategoryId() {
 			return mCategoryId;
 		}
 
@@ -156,10 +156,10 @@ public class UnitConverter {
 	}
 	
 	public static class Unit {
-		private int mUnitId;
-		private int mDescId;
-		private double mFactor;
-		private double mOffset;
+		private final int mUnitId;
+		private final int mDescId;
+		private final double mFactor;
+		private final double mOffset;
 		
 		public int getUnitId() {
 			return mUnitId;

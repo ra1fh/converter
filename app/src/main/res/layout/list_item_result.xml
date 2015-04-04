@@ -8,17 +8,17 @@
         android:id="@+id/list_item_value"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:ems="10"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical|end"
         android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 
     <TextView
         android:id="@+id/list_item_unit"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_weight="1"
         android:ems="10"
         android:gravity="center_vertical"

@@ -2,6 +2,7 @@ package de.ackstorm.converter;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -27,7 +27,7 @@ import de.ackstorm.converter.UnitConverter.UnitValue;
 
 public class MainActivity extends Activity {
 
-	public static String TAG = "Converter";
+	private static final String TAG = "Converter";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         ActionBar actionBar = getActionBar();
-        actionBar.setSubtitle(getString(R.string.app_tagline));
+        if (actionBar != null) {
+            actionBar.setSubtitle(getString(R.string.app_tagline));
+        }
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -56,6 +58,7 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -67,13 +70,12 @@ public class MainActivity extends Activity {
      */
     public static class ConverterFragment extends Fragment {
     	
-    	protected UnitConverter mUnitConverter;
-    	protected Button mConvertButton;
-    	protected Spinner mUnitSpinner;
-    	protected Spinner mCategorySpinner;
-    	protected EditText mEditText;
-    	protected ListView mOutputList;
-    	protected Integer mSavedCategory = null;
+    	UnitConverter mUnitConverter;
+    	Spinner mUnitSpinner;
+    	Spinner mCategorySpinner;
+    	EditText mEditText;
+    	ListView mOutputList;
+    	Integer mSavedCategory = null;
     	
     	private static final String KEY_CATEGORY = "category";
     	private static final String KEY_UNIT = "unit";
@@ -81,8 +83,8 @@ public class MainActivity extends Activity {
         @Override
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
-            outState.putInt(KEY_CATEGORY, Integer.valueOf(mCategorySpinner.getSelectedItemPosition()));
-            outState.putInt(KEY_UNIT, Integer.valueOf(mUnitSpinner.getSelectedItemPosition()));
+            outState.putInt(KEY_CATEGORY, mCategorySpinner.getSelectedItemPosition());
+            outState.putInt(KEY_UNIT, mUnitSpinner.getSelectedItemPosition());
         }
     	
     	@Override
@@ -186,7 +188,7 @@ public class MainActivity extends Activity {
         public void populateSpinner(Spinner spinner, ArrayList<CharSequence> strings) {
         	ArrayAdapter<CharSequence> adapter;
         	
-        	adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, strings);
+        	adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, strings);
     		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     		spinner.setAdapter(adapter);
         }
@@ -196,7 +198,7 @@ public class MainActivity extends Activity {
            	ArrayList<CharSequence> categoryStrings;
 
            	categoryIds = mUnitConverter.getCategories();
-        	categoryStrings = new ArrayList<CharSequence>();
+        	categoryStrings = new ArrayList<>();
 
         	for (Integer i : categoryIds) {
         		categoryStrings.add(getActivity().getApplicationContext().getString(i));
@@ -209,7 +211,7 @@ public class MainActivity extends Activity {
            	ArrayList<CharSequence> unitStrings;
 
            	units = mUnitConverter.getUnits(category);
-        	unitStrings = new ArrayList<CharSequence>();
+        	unitStrings = new ArrayList<>();
 
         	for (Unit u : units) {
         		String unit = getActivity().getApplicationContext().getString(u.getUnitId());
@@ -232,7 +234,7 @@ public class MainActivity extends Activity {
 			int unitIndex;
 			int categoryIndex;
 
-			result = new ArrayList<UnitValue>();
+			result = new ArrayList<>();
 			unitIndex = mUnitSpinner.getSelectedItemPosition();
 			categoryIndex = mCategorySpinner.getSelectedItemPosition();
 			
@@ -251,7 +253,7 @@ public class MainActivity extends Activity {
 			}
 	            
 			try {
-				value = Float.valueOf(valueString.trim()).floatValue();
+				value = Float.valueOf(valueString.trim());
 				result = mUnitConverter.convert(categoryIndex, unitIndex, value);
 			} catch (NumberFormatException e) {
 				Log.d(TAG, "updateResult: invalid number format");
@@ -266,7 +268,8 @@ public class MainActivity extends Activity {
         		super(getActivity(), 0, values);
         	}
         	
-        	@Override
+        	@SuppressLint("InflateParams")
+            @Override
         	public View getView(int position, View convertView, ViewGroup parent) {
         		if (convertView == null) {
         			convertView = getActivity().getLayoutInflater()

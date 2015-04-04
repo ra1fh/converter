@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <Spinner
         android:id="@+id/category_spinner"
@@ -19,7 +19,8 @@
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:inputType="text|numberDecimal" />
+        android:inputType="text|numberDecimal"
+        tools:ignore="LabelFor" />
 	
     <ListView
         android:id="@+id/output_list"

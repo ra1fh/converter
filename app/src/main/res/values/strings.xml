@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <resources>
 
     <string name="app_name">Converter</string>
     <string name="app_tagline">Unit conversion</string>
     <string name="action_about">Info</string>
     <string name="action_settings">Settings</string>
-    <string name="button_send">Convert</string>
     <string name="app_descrip">Desc</string>
     <string name="app_credits">Cred</string>
 
@@ -20,19 +20,19 @@
     <string name="cat_mass">Mass</string>
     <string name="cat_temperature">Temperature</string>
     <string name="cat_speed">Speed</string>
-    <string name="cat_currency">Curreny</string>
+    <string name="cat_currency">Currency</string>
     
     <!-- Length -->
     
-    <string name="unit_mm">mm</string>
-    <string name="unit_m">m</string>
-    <string name="unit_km">km</string>
-    <string name="unit_in">in</string>
-    <string name="unit_ft">ft</string>
-    <string name="unit_yd">yd</string>
-    <string name="unit_mi">mi</string>
-    <string name="unit_nmi">nmi</string>
-    <string name="unit_ly">ly</string>
+    <string name="unit_mm" translatable="false">mm</string>
+    <string name="unit_m" translatable="false">m</string>
+    <string name="unit_km" translatable="false">km</string>
+    <string name="unit_in" translatable="false">in</string>
+    <string name="unit_ft" translatable="false">ft</string>
+    <string name="unit_yd" translatable="false">yd</string>
+    <string name="unit_mi" translatable="false">mi</string>
+    <string name="unit_nmi" translatable="false">nmi</string>
+    <string name="unit_ly" translatable="false">ly</string>
     
     <string name="desc_mm">millimetre</string>
     <string name="desc_m">metre</string>
@@ -46,12 +46,12 @@
 
     <!-- Area -->
     
-    <string name="unit_yd2">yd²</string>
-    <string name="unit_m2">m²</string>
-    <string name="unit_ha">ha</string>
-    <string name="unit_km2">km²</string>
-    <string name="unit_ac">ac</string>
-    <string name="unit_mi2">mi²</string>
+    <string name="unit_yd2" translatable="false">yd²</string>
+    <string name="unit_m2" translatable="false">m²</string>
+    <string name="unit_ha" translatable="false">ha</string>
+    <string name="unit_km2" translatable="false">km²</string>
+    <string name="unit_ac" translatable="false">ac</string>
+    <string name="unit_mi2" translatable="false">mi²</string>
     
     <string name="desc_yd2">square yard</string>
     <string name="desc_m2">square metre</string>
@@ -62,10 +62,10 @@
     
     <!-- Volume -->
     
-    <string name="unit_l">l</string>
-    <string name="unit_m3">m³</string>
-    <string name="unit_gal_us">gal</string>
-    <string name="unit_gal_imp">imp gal</string>
+    <string name="unit_l" translatable="false">l</string>
+    <string name="unit_m3" translatable="false">m³</string>
+    <string name="unit_gal_us" translatable="false">gal</string>
+    <string name="unit_gal_imp" translatable="false">imp gal</string>
     
     <string name="desc_l">litre</string>
     <string name="desc_m3">cubic metre</string>
@@ -74,29 +74,29 @@
     
     <!-- Torque -->
     
-    <string name="unit_nm">N\u2009m</string>
-    <string name="unit_inlbf">in\u2009lbf</string>
-    <string name="unit_ftlbf">ft\u2009lbf</string>
+    <string name="unit_nm" translatable="false">N\u2009m</string>
+    <string name="unit_inlbf" translatable="false">in\u2009lbf</string>
+    <string name="unit_ftlbf" translatable="false">ft\u2009lbf</string>
     
-    <string name="desc_nm"></string>
-    <string name="desc_inlbf"></string>
-    <string name="desc_ftlbf"></string>
+    <string name="desc_nm">newton metre</string>
+    <string name="desc_inlbf" translatable="false"></string>
+    <string name="desc_ftlbf" translatable="false"></string>
     
     <!-- Mass -->
     
-    <string name="unit_kg">kg</string>
-    <string name="unit_lb">lb</string>
-    <string name="unit_oz">oz</string>
+    <string name="unit_kg" translatable="false">kg</string>
+    <string name="unit_lb" translatable="false">lb</string>
+    <string name="unit_oz" translatable="false">oz</string>
     
-    <string name="desc_kg"></string>
+    <string name="desc_kg">kilogram</string>
     <string name="desc_lb">pound</string>
     <string name="desc_oz">US</string>
     
     <!-- Temperature -->
     
-    <string name="unit_celsius">°C</string>
-    <string name="unit_fahrenheit">°F</string>
-    <string name="unit_kelvin">K</string>
+    <string name="unit_celsius" translatable="false">°C</string>
+    <string name="unit_fahrenheit" translatable="false">°F</string>
+    <string name="unit_kelvin" translatable="false">K</string>
 
     <string name="desc_celsius">Celsius</string>
     <string name="desc_fahrenheit">Fahrenheit</string>
@@ -104,10 +104,10 @@
     
     <!-- Speed -->
     
-    <string name="unit_mps">m/s</string>
-    <string name="unit_kmh">km/h</string>
-    <string name="unit_mph">mph</string>
-    <string name="unit_knot">knot</string>
+    <string name="unit_mps" translatable="false">m/s</string>
+    <string name="unit_kmh" translatable="false">km/h</string>
+    <string name="unit_mph" translatable="false">mph</string>
+    <string name="unit_knot" translatable="false">knot</string>
     
     <string name="desc_mps">metre per second</string>
     <string name="desc_kmh">kilometre per hour</string>
@@ -116,9 +116,9 @@
 
     <!-- Currency -->
 
-    <string name="unit_euro">€</string>
-    <string name="unit_dollar">$</string>
-    <string name="unit_rupee">&#8377;</string>
+    <string name="unit_euro" translatable="false">€</string>
+    <string name="unit_dollar" translatable="false">$</string>
+    <string name="unit_rupee" translatable="false">&#8377;</string>
 
     <string name="desc_euro">Euro</string>
     <string name="desc_dollar">Dollar</string>

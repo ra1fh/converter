@@ -5,7 +5,6 @@
     <string name="app_tagline">Umrechnen von Einheiten</string>
     <string name="action_about">Info</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="button_send">Konvertieren</string>
 
     <string name="app_descrip">Desc</string>
     <string name="app_credits">Cred</string>
@@ -67,12 +66,12 @@
 
     <!-- Currency -->
 
-    <string name="unit_euro">€</string>
-    <string name="unit_dollar">$</string>
-    <string name="unit_rupee">&#8377;</string>
-
     <string name="desc_euro">Euro</string>
     <string name="desc_dollar">Dollar</string>
     <string name="desc_rupee">Rupie</string>
+    <string name="desc_kelvin">Kelvin</string>
+    <string name="desc_fahrenheit">Fahrenheit</string>
+    <string name="desc_celsius">Celsius</string>
+    <string name="desc_nm">Newtonmeter</string>
 
 </resources>
