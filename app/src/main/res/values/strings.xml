@@ -21,7 +21,9 @@
     <string name="cat_temperature">Temperature</string>
     <string name="cat_speed">Speed</string>
     <string name="cat_currency">Currency</string>
-    
+    <string name="cat_energy">Energy</string>
+    <string name="cat_pressure">Pressure</string>
+
     <!-- Length -->
     
     <string name="unit_mm" translatable="false">mm</string>
@@ -119,8 +121,46 @@
     <string name="unit_euro" translatable="false">€</string>
     <string name="unit_dollar" translatable="false">$</string>
     <string name="unit_rupee" translatable="false">&#8377;</string>
+    <string name="unit_sfr" translatable="false">Fr.</string>
+    <string name="unit_gbp" translatable="false">£</string>
 
     <string name="desc_euro">Euro</string>
     <string name="desc_dollar">Dollar</string>
     <string name="desc_rupee">Rupee</string>
+    <string name="desc_sfr">Swiss Franc</string>
+    <string name="desc_gbp">Pound</string>
+
+    <!-- Energy -->
+
+    <string name="unit_joule" translatable="false">J</string>
+    <string name="unit_kilojoule" translatable="false">kJ</string>
+    <string name="unit_cal" translatable="false">cal</string>
+    <string name="unit_kcal" translatable="false">kCal</string>
+    <string name="unit_ws" translatable="false">Ws</string>
+    <string name="unit_wh" translatable="false">Wh</string>
+    <string name="unit_kwh" translatable="false">kWh</string>
+
+    <string name="desc_joule">Joule</string>
+    <string name="desc_kilojoule">Kilojoule</string>
+    <string name="desc_cal">Calories</string>
+    <string name="desc_kcal">Kilocalories</string>
+    <string name="desc_ws">Watt second</string>
+    <string name="desc_wh">Watthours</string>
+    <string name="desc_kwh">Kilowatthours</string>
+
+    <!-- Pressure -->
+    <string name="unit_psi" translatable="false">psi</string>
+    <string name="unit_bar" translatable="false">bar</string>
+    <string name="unit_mbar" translatable="false">mbar</string>
+    <string name="unit_pa"  translatable="false">Pa</string>
+    <string name="unit_hpa" translatable="false">hPa</string>
+    <string name="unit_kpa" translatable="false">kPa</string>
+
+    <string name="desc_psi">Pound/square inch</string>
+    <string name="desc_bar">Bar</string>
+    <string name="desc_mbar">Millibar</string>
+    <string name="desc_pa">Pascal</string>
+    <string name="desc_hpa">Hectopascal</string>
+    <string name="desc_kpa">Kilopascal</string>
+
 </resources>

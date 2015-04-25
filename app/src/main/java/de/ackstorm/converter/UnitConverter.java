@@ -63,10 +63,31 @@ class UnitConverter {
     	cat.add(new Unit(R.string.unit_knot,   R.string.desc_knot,  0.514444));
     	mList.add(cat);
 
+        cat = new Category(R.string.cat_pressure);
+        cat.add(new Unit(R.string.unit_pa, R.string.desc_pa,        1.000));
+        cat.add(new Unit(R.string.unit_hpa, R.string.desc_hpa,    100.000));
+        cat.add(new Unit(R.string.unit_kpa, R.string.desc_kpa,   1000.000));
+        cat.add(new Unit(R.string.unit_bar, R.string.desc_bar, 100000.0));
+        cat.add(new Unit(R.string.unit_mbar, R.string.desc_mbar,  100.0));
+        cat.add(new Unit(R.string.unit_psi, R.string.desc_psi,   6894.7573));
+        mList.add(cat);
+
+        cat = new Category(R.string.cat_energy);
+        cat.add(new Unit(R.string.unit_joule, R.string.desc_joule,                       1.000));
+        cat.add(new Unit(R.string.unit_kilojoule, R.string.desc_kilojoule,            1000.000));
+        cat.add(new Unit(R.string.unit_cal, R.string.desc_cal,                           4.184));
+        cat.add(new Unit(R.string.unit_kcal, R.string.desc_kcal,                      4184.000));
+        cat.add(new Unit(R.string.unit_ws, R.string.desc_ws,                             1.000));
+        cat.add(new Unit(R.string.unit_wh, R.string.desc_wh,                          3600.000));
+        cat.add(new Unit(R.string.unit_kwh, R.string.desc_kwh,                     3600000.000));
+        mList.add(cat);
+
         cat = new Category(R.string.cat_currency);
-        cat.add(new Unit(R.string.unit_euro,    R.string.desc_euro,        1.0000));
-        cat.add(new Unit(R.string.unit_dollar,  R.string.desc_dollar,      0.8861));
-        cat.add(new Unit(R.string.unit_rupee,   R.string.desc_rupee,       0.0142));
+        cat.add(new Unit(R.string.unit_euro,  R.string.desc_euro,             1.000));
+        cat.add(new Unit(R.string.unit_dollar,  R.string.desc_dollar,           0.940));
+        cat.add(new Unit(R.string.unit_rupee,   R.string.desc_rupee,           0.015));
+        cat.add(new Unit(R.string.unit_sfr,     R.string.desc_sfr, 0.960));
+        cat.add(new Unit(R.string.unit_gbp,     R.string.desc_gbp,         1.380));
         mList.add(cat);
 
 	}
