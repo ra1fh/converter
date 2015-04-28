@@ -6,8 +6,14 @@
     <string name="app_tagline">Unit conversion</string>
     <string name="action_about">Info</string>
     <string name="action_settings">Settings</string>
-    <string name="app_descrip">Desc</string>
-    <string name="app_credits">Cred</string>
+    <string name="about_version" translatable="false">Version</string>
+    <string name="about_site" translatable="false">Link:</string>
+    <string name="about_link">Website</string>
+    <string name="about_sitec" translatable="false">https://bitbucket.org/ralfh/converter/</string>
+    <string name="about_mail" translatable="false">E-Mail:</string>
+    <string name="about_mailc" translatable="false">ralf+converter@ackstorm.de</string>
+    <string name="about_desc" translatable="false">Released under the BSD License. See COPYING for details.</string>
+    <string name="about_ok" translatable="false">OK</string>
 
     <!-- \u2009 == &thinsp; -->
     

@@ -1,11 +1,14 @@
 package de.ackstorm.converter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +25,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
 import de.ackstorm.converter.UnitConverter.Unit;
 import de.ackstorm.converter.UnitConverter.UnitValue;
 
@@ -54,15 +60,56 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        switch (item.getItemId()) {
+
+        case R.id.action_settings:
+            return true;
+
+        case R.id.action_about:
+            showAbout();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    void showAbout() {
+        View messageView;
+        LayoutInflater li = LayoutInflater.from(this);
+        messageView = li.inflate(R.layout.about, null);
+
+        try {
+            PackageInfo pi = getPackageManager()
+                    .getPackageInfo(getApplicationContext()
+                        .getPackageName(), 0);
+            ((TextView) messageView.findViewById(R.id.version))
+                    .setText(pi.versionName);
+        } catch (Exception ignored) {
+
+        }
+
+        AlertDialog alert = new AlertDialog.Builder(this).create();
+        alert.setIcon(R.drawable.ic_launcher);
+        alert.setTitle(R.string.app_name);
+        alert.setView(messageView);
+        alert.setButton(AlertDialog.BUTTON_NEUTRAL,
+                getString(R.string.about_link),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                        Uri uri = Uri.parse("https://bitbucket.org/ralfh/converter");
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    }
+                });
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.about_ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+        alert.show();
     }
 
     /**

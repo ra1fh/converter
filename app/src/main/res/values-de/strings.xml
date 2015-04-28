@@ -6,8 +6,7 @@
     <string name="app_tagline">Umrechnen von Einheiten</string>
     <string name="action_about">Info</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="app_descrip">Desc</string>
-    <string name="app_credits">Cred</string>
+    <string name="about_link">Internetseite</string>
 
     <!-- \u2009 == &thinsp; -->
     
