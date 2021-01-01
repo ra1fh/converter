@@ -1,12 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <string name="app_name">Converter</string>
     <string name="app_tagline">Umrechnen von Einheiten</string>
-
     <string name="action_about">Info</string>
     <string name="action_settings">Einstellungen</string>
     <string name="about_link">Internetseite</string>
 
+    <!-- \u2009 == &thinsp; -->
+    
     <!-- Category -->
     
     <string name="cat_length">Länge</string>
